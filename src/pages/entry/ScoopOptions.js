@@ -1,6 +1,14 @@
 import React from "react";
-import { Grid, FormControl, InputLabel, Input } from "@material-ui/core";
-
+import {
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@material-ui/core";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
 function ScoopOptions({ name, imagePath, updateItemCount }) {
   const handleChange = (event) => {
     updateItemCount(name, event.target.value);
@@ -13,12 +21,22 @@ function ScoopOptions({ name, imagePath, updateItemCount }) {
         src={`http://localhost:3030/${imagePath}`}
         alt={`${name} scoop`}
       />
-      <form>
-        <FormControl>
-          <InputLabel>{name}</InputLabel>
-          <Input type="number" value={0} onChange={handleChange} />
-        </FormControl>
-      </form>
+      <Form.Group
+        controlId={`${name}-count`}
+        as={Row}
+        style={{ marginTop: "10px" }}
+      >
+        <Form.Label column xs="6" style={{ textAlign: "right" }}>
+          {name}
+        </Form.Label>
+        <Col xs="5" style={{ textAlign: "left" }}>
+          <Form.Control
+            type="number"
+            defaultValue={0}
+            onChange={handleChange}
+          />
+        </Col>
+      </Form.Group>
     </Grid>
   );
 }
