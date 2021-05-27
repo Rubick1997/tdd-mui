@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {Grid} from "@material-ui/core"
 import axios from "axios";
 import ScoopOptions from "./ScoopOptions";
+import ToppingOptions from "./ToppingOptions";
 
 function Options({ optionType }) {
   //optionType is "scoops or "toppings
@@ -14,7 +15,7 @@ function Options({ optionType }) {
       .catch((error) => console.log(error.message));
   }, [optionType]);
 
-  const ItemComponent = optionType === "scoops" ? ScoopOptions : null;
+  const ItemComponent = optionType === "scoops" ? ScoopOptions : ToppingOptions;
 
   const optionItems = items.map((item) => (
     <ItemComponent
@@ -26,5 +27,6 @@ function Options({ optionType }) {
 
   return <Grid container >{optionItems}</Grid>;
 }
+
 
 export default Options;
