@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@material-ui/core";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 function ScoopOptions({ name, imagePath, updateItemCount }) {
+  const [isValid, setIsValid] = useState(true);
   const handleChange = (event) => {
-    updateItemCount(name, event.target.value);
+    const currentValue = event.target.value;
+
+    // make sure we're using a number and not a string to validate
+    const currentValueFloat = parseFloat(currentValue);
+    const valueIsValid =
+      0 <= currentValueFloat &&
+      currentValueFloat <= 10 &&
+      Math.floor(currentValueFloat) === currentValueFloat;
+
+    // validate
+    setIsValid(valueIsValid);
+
+    // only update context if the value is valid
+    if (valueIsValid) updateItemCount(name, currentValue);
   };
 
   return (
@@ -29,6 +43,7 @@ function ScoopOptions({ name, imagePath, updateItemCount }) {
             defaultValue={0}
             min="0"
             onChange={handleChange}
+            isInvalid={!isValid}
           />
         </Col>
       </Form.Group>
