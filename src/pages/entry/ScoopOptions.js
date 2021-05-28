@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -33,6 +27,7 @@ function ScoopOptions({ name, imagePath, updateItemCount }) {
           <Form.Control
             type="number"
             defaultValue={0}
+            min="0"
             onChange={handleChange}
           />
         </Col>

@@ -40,17 +40,18 @@ function OrderDetailsProvider(props) {
     toppings: zeroCurrency,
     grandTotal: zeroCurrency,
   });
-
   useEffect(() => {
     const scoopsSubtotal = calculateSubtotal("scoops", optionCounts);
-    const toppingSubtotal = calculateSubtotal("toppings", optionCounts);
-    const grandTotal = scoopsSubtotal + toppingSubtotal;
+    const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
+    const grandTotal = scoopsSubtotal + toppingsSubtotal;
     setTotals({
       scoops: formatCurrency(scoopsSubtotal),
-      topping: formatCurrency(toppingSubtotal),
+      toppings: formatCurrency(toppingsSubtotal),
       grandTotal: formatCurrency(grandTotal),
     });
   }, [optionCounts]);
+
+
 
   const value = useMemo(() => {
     function updateItemCount(itemName, newItemCount, optionType) {
