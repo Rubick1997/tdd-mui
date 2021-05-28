@@ -5,12 +5,19 @@ import { Button } from "@material-ui/core";
 
 function OrderEntry({ setOrderPhase }) {
   const [orderDetails] = useOrderDetails();
+
+  const orderDisabled = orderDetails.totals.scoops === "$0.00";
   return (
     <div>
       <Options optionType="scoops" />
       <Options optionType="toppings" />
       <h2>Grand total:{orderDetails.totals.grandTotal}</h2>
-      <Button onClick={() => setOrderPhase("review")} color="primary" variant="contained">
+      <Button
+       disabled={orderDisabled}
+        onClick={() => setOrderPhase("review")}
+        color="primary"
+        variant="contained"
+      >
         Order Sundae!
       </Button>
     </div>

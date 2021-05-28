@@ -78,3 +78,22 @@ test("order phases for happy path", async () => {
     name: "Cherries",
   });
 });
+
+test("optional topping on summary page", async() => {
+  render(<App />);
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, "1");
+  const orderSummaryButton = screen.getByRole("button", {
+    name: /order sundae/i,
+  });
+  userEvent.click(orderSummaryButton);
+  const summaryHeading = await screen.findByRole("heading", {
+    name: "Order Summary",
+  });
+  expect(summaryHeading).toBeInTheDocument();
+  const noToppings = screen.queryByText(/topping/i);
+  expect(noToppings).not.toBeInTheDocument();
+});
