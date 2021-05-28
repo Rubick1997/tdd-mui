@@ -12,7 +12,7 @@ function ScoopOptions({ name, imagePath, updateItemCount }) {
     const currentValueFloat = parseFloat(currentValue);
     const valueIsValid =
       0 <= currentValueFloat &&
-      currentValueFloat <= 10 &&
+      currentValueFloat <= 12 &&
       Math.floor(currentValueFloat) === currentValueFloat;
 
     // validate

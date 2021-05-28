@@ -15,7 +15,7 @@ test("indicate if scoop ount is non-int or out of range", () => {
   expect(vanillaInput).toHaveClass("is-invalid");
 
   userEvent.clear(vanillaInput);
-  userEvent.type(vanillaInput, "12");
+  userEvent.type(vanillaInput, "13");
   expect(vanillaInput).toHaveClass("is-invalid");
 
   userEvent.clear(vanillaInput);
