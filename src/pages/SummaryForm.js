@@ -5,21 +5,28 @@ import {
   Button,
   Typography,
   Popover,
-  makeStyles
+  makeStyles,
 } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   popover: {
-    pointerEvents: 'none',
+    pointerEvents: "none",
   },
   paper: {
     padding: theme.spacing(1),
   },
 }));
 
-function SummaryForm() {
+function SummaryForm({ setOrderPhase }) {
   const [checked, setChecked] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const classes = useStyles();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    setOrderPhase("completed");
+  };
+
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -44,9 +51,9 @@ function SummaryForm() {
         <Popover
           id="mouse-over-popover"
           className={classes.popover}
-        classes={{
-          paper: classes.paper,
-        }}
+          classes={{
+            paper: classes.paper,
+          }}
           open={open}
           anchorEl={anchorEl}
           anchorOrigin={{
@@ -67,7 +74,7 @@ function SummaryForm() {
   );
 
   return (
-    <form action="">
+    <form onSubmit={handleSubmit}>
       <FormControlLabel
         control={
           <Checkbox
@@ -82,6 +89,7 @@ function SummaryForm() {
         color="primary"
         variant="contained"
         disabled={!checked}
+        type="submit"
       >
         Confirm Order
       </Button>
