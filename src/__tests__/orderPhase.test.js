@@ -44,12 +44,20 @@ test("order phases for happy path", async () => {
   userEvent.click(checkbox);
   userEvent.click(button);
 
+  //expect loading ti show
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
+
   //POST request is happening here
 
   const thankYouHeader = await screen.findByRole("heading", {
     name: /thank you/i,
   });
   expect(thankYouHeader).toBeInTheDocument();
+
+  //expect loading to hide
+  const notLoading = screen.queryByText(/loading/i);
+  expect(notLoading).not.toBeInTheDocument();
 
   const orderNumber = await screen.findByText(/order number/i);
   expect(orderNumber).toBeInTheDocument();
